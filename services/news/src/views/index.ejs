@@ -179,7 +179,10 @@
     }
 
     async function setupDemo () {
-      if ('<%= isMultiSeller %>' !== 'true') {
+      const searchParams = new URLSearchParams(window.location.search);
+      const multiSellerSearchParams = searchParams.get('auctionType');
+
+      if (multiSellerSearchParams !== 'multi') {
         document.getElementById('video-ad-container').style.display = 'none'
         addScriptEl('<%= SSP_TAG_URL %>', 'ssp_tag')
         return
