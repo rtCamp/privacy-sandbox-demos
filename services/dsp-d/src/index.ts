@@ -34,18 +34,24 @@ import {
 const {
   EXTERNAL_PORT,
   PORT,
-  DSP_B_HOST,
-  DSP_B_TOKEN,
-  DSP_B_DETAIL,
+  DSP_D_HOST,
+  DSP_D_TOKEN,
+  DSP_D_DETAIL,
   SSP_A_HOST,
   SSP_B_HOST,
+  SSP_C_HOST,
+  SSP_D_HOST,
   SHOP_HOST,
 } = process.env;
 
 const SSP_A = new URL(`https://${SSP_A_HOST}:${EXTERNAL_PORT}`).toString();
 const SSP_B = new URL(`https://${SSP_B_HOST}:${EXTERNAL_PORT}`).toString();
+const SSP_C = new URL(`https://${SSP_C_HOST}:${EXTERNAL_PORT}`).toString();
+const SSP_D = new URL(`https://${SSP_D_HOST}:${EXTERNAL_PORT}`).toString();
 const SSP_A_VAST_URL = `${SSP_A}vast`;
 const SSP_B_VAST_URL = `${SSP_B}vast`;
+const SSP_C_VAST_URL = `${SSP_C}vast`;
+const SSP_D_VAST_URL = `${SSP_D}vast`;
 
 // in-memory storage for debug reports
 const Reports: any[] = [];
@@ -62,7 +68,7 @@ const app: Application = express();
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Origin-Trial', DSP_B_TOKEN as string);
+  res.setHeader('Origin-Trial', DSP_D_TOKEN as string);
   next();
 });
 
@@ -83,7 +89,7 @@ app.use((req, res, next) => {
 app.use(
   express.static('src/public', {
     setHeaders: (res: Response, path, stat) => {
-      const url = new URL(path, `https://${DSP_B_HOST}`);
+      const url = new URL(path, `https://${DSP_D_HOST}`);
       if (url.pathname.endsWith('bidding-logic.js')) {
         return res.set('X-Allow-FLEDGE', 'true');
       }
@@ -109,14 +115,14 @@ app.get('/ads', async (req, res) => {
   const {advertiser, id} = req.query;
   console.log('Loading frame content : ', {advertiser, id});
 
-  const title = `Your special ads from ${advertiser} by ${DSP_B_HOST}`;
+  const title = `Your special ads from ${advertiser} by ${DSP_D_HOST}`;
 
   const move = new URL(`https://${advertiser}:${EXTERNAL_PORT}/items/${id}`);
 
   const creative = new URL(`https://${advertiser}:${EXTERNAL_PORT}/ads/${id}`);
 
   const registerSource = new URL(
-    `https://${DSP_B_HOST}:${EXTERNAL_PORT}/register-source`,
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/register-source`,
   );
   registerSource.searchParams.append('advertiser', advertiser as string);
   registerSource.searchParams.append('id', id as string);
@@ -128,8 +134,8 @@ app.get('/join-ad-interest-group.html', async (req: Request, res: Response) => {
   const title = 'Join Ad Interest Group';
   res.render('join-ad-interest-group', {
     title,
-    DSP_B_TOKEN,
-    DSP_B_HOST,
+    DSP_D_TOKEN,
+    DSP_D_HOST,
     EXTERNAL_PORT,
   });
 });
@@ -140,26 +146,32 @@ app.get('/interest-group.json', async (req: Request, res: Response) => {
     return res.sendStatus(400);
   }
 
-  const imageCreative = new URL(`https://${DSP_B_HOST}:${EXTERNAL_PORT}/ads`);
+  const imageCreative = new URL(`https://${DSP_D_HOST}:${EXTERNAL_PORT}/ads`);
   imageCreative.searchParams.append('advertiser', advertiser as string);
   imageCreative.searchParams.append('id', id as string);
 
   const videoCreativeForSspA = new URL(
-    `https://${DSP_B_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_A_VAST_URL}`,
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_A_VAST_URL}`,
   );
   const videoCreativeForSspB = new URL(
-    `https://${DSP_B_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_B_VAST_URL}`,
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_B_VAST_URL}`,
+  );
+  const videoCreativeForSspC = new URL(
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_C_VAST_URL}`,
+  );
+  const videoCreativeForSspD = new URL(
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_D_VAST_URL}`,
   );
 
-  const owner = new URL(`https://${DSP_B_HOST}:${EXTERNAL_PORT}`);
+  const owner = new URL(`https://${DSP_D_HOST}:${EXTERNAL_PORT}`);
   const biddingLogicUrl = new URL(
-    `https://${DSP_B_HOST}:${EXTERNAL_PORT}/js/bidding-logic.js`,
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/js/bidding-logic.js`,
   );
   const trustedBiddingSignalsUrl = new URL(
-    `https://${DSP_B_HOST}:${EXTERNAL_PORT}/bidding_signal.json`,
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/bidding_signal.json`,
   );
   const dailyUpdateUrl = new URL(
-    `https://${DSP_B_HOST}:${EXTERNAL_PORT}/daily_update_url`,
+    `https://${DSP_D_HOST}:${EXTERNAL_PORT}/daily_update_url`,
   );
 
   res.json({
@@ -207,6 +219,20 @@ app.get('/interest-group.json', async (req: Request, res: Response) => {
           seller: SSP_B,
         },
       },
+      {
+        renderUrl: videoCreativeForSspC,
+        metadata: {
+          adType: 'video',
+          seller: SSP_C,
+        },
+      },
+      {
+        renderUrl: videoCreativeForSspD,
+        metadata: {
+          adType: 'video',
+          seller: SSP_D,
+        },
+      },
     ],
   });
 });
@@ -235,17 +261,17 @@ app.get('/bidding_signal.json', async (req: Request, res: Response) => {
 // auction bids. This is to lower the chance that a contextual ad is
 // rendered so that the testers have easier time testing a Protected
 // Audience ad
-app.get('/header-bid', async (req, res) => {
+app.get('/header-bid', async (req: Request, res: Response) => {
   res.json({
     bid: Math.floor(Math.random() * 70),
-    renderUrl: `https://${DSP_B_HOST}/html/header-bidding-ad.html`,
+    renderUrl: `https://${DSP_D_HOST}/html/header-bidding-ad.html`,
   });
 });
 
-app.get('/ad-server-bid', async (req, res) => {
+app.get('/ad-server-bid', async (req: Request, res: Response) => {
   res.json({
-    bid: Math.floor(Math.random() * 50),
-    renderUrl: `https://${DSP_B_HOST}/html/ad-server-ad.html`,
+    bid: Math.floor(Math.random() * 70),
+    renderUrl: `https://${DSP_D_HOST}/html/ad-server-ad.html`,
   });
 });
 
@@ -489,8 +515,8 @@ app.post(
 );
 
 app.get('/', async (req: Request, res: Response) => {
-  const title = DSP_B_DETAIL;
-  res.render('index', {title, DSP_B_HOST, SHOP_HOST, EXTERNAL_PORT});
+  const title = DSP_D_DETAIL;
+  res.render('index', {title, DSP_D_HOST, SHOP_HOST, EXTERNAL_PORT});
 });
 
 app.listen(PORT, function () {

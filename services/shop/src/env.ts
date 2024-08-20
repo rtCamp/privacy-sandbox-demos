@@ -6,4 +6,6 @@ export const SSP_HOST = process.env.SSP_HOST || 'localhost';
 export const DSP_HOST = process.env.DSP_HOST || 'localhost';
 export const DSP_A_HOST = process.env.DSP_A_HOST || 'localhost';
 export const DSP_B_HOST = process.env.DSP_B_HOST || 'localhost';
+export const DSP_C_HOST = process.env.DSP_C_HOST || 'localhost';
+export const DSP_D_HOST = process.env.DSP_D_HOST || 'localhost';
 export const AD_SERVER_HOST = process.env.AD_SERVER_HOST || 'localhost';

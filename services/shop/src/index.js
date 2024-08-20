@@ -16,7 +16,7 @@
 import express from 'express';
 import session from 'express-session';
 import MemoryStoreFactory from 'memorystore';
-import { DSP_HOST, DSP_A_HOST, DSP_B_HOST, EXTERNAL_PORT, PORT, SHOP_DETAIL, SHOP_HOST, } from './env.js';
+import { DSP_HOST, DSP_A_HOST, DSP_B_HOST, DSP_C_HOST, DSP_D_HOST, EXTERNAL_PORT, PORT, SHOP_DETAIL, SHOP_HOST, } from './env.js';
 import { addOrder, displayCategory, fromSize, getItem, getItems, removeOrder, updateOrder, } from './lib/items.js';
 const app = express();
 app.set('trust proxy', 1); // required for Set-Cookie with Secure
@@ -87,11 +87,16 @@ app.get('/items/:id', async (req, res) => {
     const DSP_TAG_URL = new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}/dsp-tag.js`);
     const DSP_A_TAG_URL = new URL(`https://${DSP_A_HOST}:${EXTERNAL_PORT}/dsp-tag.js`);
     const DSP_B_TAG_URL = new URL(`https://${DSP_B_HOST}:${EXTERNAL_PORT}/dsp-tag.js`);
+    const DSP_C_TAG_URL = new URL(`https://${DSP_C_HOST}:${EXTERNAL_PORT}/dsp-tag.js`);
+    const DSP_D_TAG_URL = new URL(`https://${DSP_D_HOST}:${EXTERNAL_PORT}/dsp-tag.js`);
     res.render('item', {
         item,
         DSP_TAG_URL,
         DSP_A_TAG_URL,
         DSP_B_TAG_URL,
+        DSP_C_TAG_URL,
+        DSP_D_TAG_URL,
+        DSP_D_TAG_URL,
         SHOP_HOST,
         isMultiSeller,
     });

@@ -14,7 +14,7 @@
  limitations under the License.
  */
 
-// SSP_A
+// SSP_C
 import express from 'express';
 import path from 'path';
 import {readFile} from 'fs/promises';
@@ -28,33 +28,47 @@ const {
   PORT,
   SSP_A_HOST,
   SSP_B_HOST,
-  SSP_A_DETAIL,
-  SSP_A_TOKEN,
+  SSP_C_DETAIL,
+  SSP_C_TOKEN,
   DSP_A_HOST,
   DSP_A_URI,
   DSP_B_HOST,
   DSP_B_URI,
   SHOP_HOST,
   NEWS_HOST,
+  SSP_C_HOST,
+  SSP_D_HOST,
+  DSP_C_HOST,
+  DSP_C_URI,
+  DSP_D_HOST,
+  DSP_D_URI,
 } = process.env;
 
 const DSP_A = new URL(`https://${DSP_A_HOST}:${EXTERNAL_PORT}`);
 const DSP_B = new URL(`https://${DSP_B_HOST}:${EXTERNAL_PORT}`);
-const SSP_A = new URL(`https://${SSP_A_HOST}:${EXTERNAL_PORT}`);
+const DSP_C = new URL(`https://${DSP_C_HOST}:${EXTERNAL_PORT}`);
+const DSP_D = new URL(`https://${DSP_D_HOST}:${EXTERNAL_PORT}`);
+const SSP_C = new URL(`https://${SSP_C_HOST}:${EXTERNAL_PORT}`);
 
 const app = express();
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Origin-Trial', SSP_A_TOKEN);
+  res.setHeader('Origin-Trial', SSP_C_TOKEN);
   next();
 });
 
 const ALLOWED_HOSTNAMES = [
   DSP_A_HOST,
   DSP_B_HOST,
+  DSP_C_HOST,
+  DSP_D_HOST,
+  DSP_D_HOST,
+  DSP_C_HOST,
   SSP_A_HOST,
   SSP_B_HOST,
+  SSP_C_HOST,
+  SSP_D_HOST,
   NEWS_HOST,
 ];
 
@@ -94,12 +108,14 @@ app.set('view engine', 'ejs');
 app.set('views', 'src/views');
 
 app.get('/', async (req, res) => {
-  const title = SSP_A_DETAIL;
+  const title = SSP_C_DETAIL;
   res.render('index.html.ejs', {
     title,
     DSP_A_HOST,
     DSP_B_HOST,
-    SSP_A_HOST,
+    DSP_C_HOST,
+    DSP_D_HOST,
+    SSP_C_HOST,
     EXTERNAL_PORT,
     SHOP_HOST,
   });
@@ -115,7 +131,7 @@ app.get('/video-ad-tag.html', async (req, res) => {
 
 async function getHeaderBiddingAd() {
   const headerBids = await Promise.all(
-    [`${DSP_A_URI}/header-bid`, `${DSP_B_URI}/header-bid`].map(
+    [`${DSP_A_URI}/header-bid`, `${DSP_B_URI}/header-bid`, `${DSP_C_URI}/header-bid`, `${DSP_D_URI}/header-bid`].map(
       async (dspUrl) => {
         const response = await fetch(dspUrl);
         const result = await response.json();
@@ -130,28 +146,30 @@ async function getHeaderBiddingAd() {
 
 function getComponentAuctionConfig() {
   return {
-    seller: SSP_A,
-    decisionLogicUrl: `${SSP_A}js/decision-logic.js`,
-    trustedScoringSignalsURL: `${SSP_A}/signals/trusted.json`,
-    directFromSellerSignals: `${SSP_A}/signals/direct.json`,
-    interestGroupBuyers: [DSP_A, DSP_B],
+    seller: SSP_C,
+    decisionLogicUrl: `${SSP_C}js/decision-logic.js`,
+    trustedScoringSignalsURL: `${SSP_C}/signals/trusted.json`,
+    directFromSellerSignals: `${SSP_C}/signals/direct.json`,
+    interestGroupBuyers: [DSP_A, DSP_B, DSP_C, DSP_D],
     perBuyerSignals: {
       [DSP_A]: {'some-key': 'some-value'},
       [DSP_B]: {'some-key': 'some-value'},
+      [DSP_C]: {'some-key': 'some-value'},
+      [DSP_D]: {'some-key': 'some-value'},
     },
     // After M123, you will be able to pass in data from the winning SSP to the
     // ad creative using deprecatedReplaceInURN for component sellers:
     // https://github.com/WICG/turtledove/issues/286#issuecomment-1910551260
     //
     // deprecatedReplaceInURN: {
-    //   '%%SSP_VAST_URI%%': `${SSP_A}/vast/preroll.xml`,
+    //   '%%SSP_VAST_URI%%': `${SSP_C}/vast/preroll.xml`,
     // }
   };
 }
 
 app.get('/header-bid', async (req, res) => {
   res.json({
-    seller: SSP_A,
+    seller: SSP_C,
     headerBiddingAd: await getHeaderBiddingAd(),
     componentAuctionConfig: getComponentAuctionConfig(),
   });
@@ -159,7 +177,7 @@ app.get('/header-bid', async (req, res) => {
 
 async function getAdServerAd() {
   const adServerBids = await Promise.all(
-    [`${DSP_A_URI}/ad-server-bid`, `${DSP_B_URI}/ad-server-bid`].map(
+    [`${DSP_A_URI}/ad-server-bid`, `${DSP_B_URI}/ad-server-bid`, `${DSP_C_URI}/ad-server-bid`, `${DSP_D_URI}/ad-server-bid`].map(
       async (dspUrl) => {
         const response = await fetch(dspUrl);
         const result = await response.json();
@@ -174,7 +192,7 @@ async function getAdServerAd() {
 
 app.get('/ad-server-bid', async (req, res) => {
   res.json({
-    seller: SSP_A,
+    seller: SSP_C,
     adServerAd: await getAdServerAd(),
   });
 });
