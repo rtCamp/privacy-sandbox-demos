@@ -8,10 +8,14 @@ volumes:
   dsp_node_modules:
   dsp_a_node_modules:
   dsp_b_node_modules:
+  dsp_c_node_modules:
+  dsp_d_node_modules:
   ssp_node_modules:
   ssp_top_node_modules:
   ssp_a_node_modules:
   ssp_b_node_modules:
+  ssp_c_node_modules:
+  ssp_d_node_modules:
   topics_node_modules:
   topics-server_node_modules:
   ad_server_node_modules:
@@ -104,6 +108,32 @@ services:
       - dsp_b_node_modules:/workspace/node_modules
     networks:
       - adnetwork
+  
+  dsp-c:
+    image: gcr.io/privacy-sandbox-demos/dsp-c:latest
+    build: ./services/dsp-c
+    container_name: "sandcastle_dsp_c"
+    hostname: ${DSP_C_HOST:?err}
+    env_file:
+      - .env
+    volumes:
+      - ./services/dsp-c:/workspace
+      - dsp_c_node_modules:/workspace/node_modules
+    networks:
+      - adnetwork
+
+  dsp-d:
+    image: gcr.io/privacy-sandbox-demos/dsp-d:latest
+    build: ./services/dsp-d
+    container_name: "sandcastle_dsp_d"
+    hostname: ${DSP_D_HOST:?err}
+    env_file:
+      - .env
+    volumes:
+      - ./services/dsp-d:/workspace
+      - dsp_d_node_modules:/workspace/node_modules
+    networks:
+      - adnetwork
 
   ssp:
     image: gcr.io/privacy-sandbox-demos/ssp:latest
@@ -141,6 +171,32 @@ services:
     volumes:
       - ./services/ssp-b:/workspace
       - ssp_b_node_modules:/workspace/node_modules
+    networks:
+      - adnetwork
+    
+  ssp-c:
+    image: gcr.io/privacy-sandbox-demos/ssp-c:latest
+    build: ./services/ssp-c
+    container_name: "sandcastle_ssp_c"
+    hostname: ${SSP_C_HOST:?err}
+    env_file:
+      - .env
+    volumes:
+      - ./services/ssp-c:/workspace
+      - ssp_c_node_modules:/workspace/node_modules
+    networks:
+      - adnetwork
+  
+  ssp-d:
+    image: gcr.io/privacy-sandbox-demos/ssp-d:latest
+    build: ./services/ssp-d
+    container_name: "sandcastle_ssp_d"
+    hostname: ${SSP_C_HOST:?err}
+    env_file:
+      - .env
+    volumes:
+      - ./services/ssp-d:/workspace
+      - ssp_d_node_modules:/workspace/node_modules
     networks:
       - adnetwork
 
