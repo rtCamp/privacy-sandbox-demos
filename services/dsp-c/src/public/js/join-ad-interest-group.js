@@ -22,6 +22,7 @@ async function getInterestGroupFromServer() {
   for (const searchParam of currentUrl.searchParams) {
     interestGroupUrl.searchParams.append(searchParam[0], searchParam[1]);
   }
+
   const res = await fetch(interestGroupUrl);
   if (res.ok) {
     return res.json();
@@ -33,7 +34,7 @@ document.addEventListener('DOMContentLoaded', async (e) => {
     return console.log('[DEMO] Protected Audience API is not supported');
   }
   const interestGroup = await getInterestGroupFromServer();
-  console.log(`[DEMO] ${{interestGroup}}`);
+  console.log(`[DEMO] ${JSON.stringify(interestGroup)}`);
   const kSecsPerDay = 3600 * 24 * 30;
   console.log(await navigator.joinAdInterestGroup(interestGroup, kSecsPerDay));
 

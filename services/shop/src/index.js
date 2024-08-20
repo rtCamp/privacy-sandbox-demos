@@ -96,7 +96,6 @@ app.get('/items/:id', async (req, res) => {
         DSP_B_TAG_URL,
         DSP_C_TAG_URL,
         DSP_D_TAG_URL,
-        DSP_D_TAG_URL,
         SHOP_HOST,
         isMultiSeller,
     });
