@@ -26,7 +26,7 @@ function scoreAd(
   browserSignals,
 ) {
   return {
-    desirability: 1,
+    desirability: bid.bid,
     allowComponentAuction: true,
   };
 }

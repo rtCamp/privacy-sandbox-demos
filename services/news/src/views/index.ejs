@@ -130,16 +130,12 @@
       // Article: https://developers.google.com/privacy-sandbox/relevance/protected-audience-api/reporting
       // Webinar recording: https://goo.gle/ps-protected-audience-webinar-3-recording-emea
       // Slide deck: https://goo.gle/ps-protected-audience-webinar-3-deck
-
       const auctionId = Math.floor(Math.random() * 10000000, 10);
-
       // A header bidding auction is executed first on the page
       const headerBiddingAuctionResult = await headerBiddingLib.startAuction({ auctionId, adUnit, sellers })
-
       // An ad server auction is executed and is compared against the header bidding auction
       // winner to determine the final contextual auction winner
       const contextualAuctionResult = await adServerLib.startAdServerAuction({ auctionId, headerBiddingAuctionResult })
-
       // After the contextual auctions, the Protected Audience auction starts. 
       // THe contextual auction result contains the winning contextual ad bid price
       // and the commponent auction configs with per-buyer signals to be used for
@@ -149,7 +145,8 @@
 
     function renderDemoAds() {
       // Define the sellers participating in the ad auctions
-      const sellers = ['<%= SSP_A_HOST %>', '<%= SSP_B_HOST %>']
+      
+      const sellers = ['<%= SSP_A_HOST %>', '<%= SSP_B_HOST %>', '<%= SSP_C_HOST %>', '<%= SSP_D_HOST %>']
 
       // Define the ads to be displayed on the page
       const imageIframeAdUnit = {
@@ -174,8 +171,8 @@
 
       // Start the auction for each ad unit
       startSequentialAuction(imageIframeAdUnit, sellers)
-      startSequentialAuction(imageFencedFrameAdUnit, sellers)
-      startSequentialAuction(videoIframeAdUnit, sellers)
+      //startSequentialAuction(imageFencedFrameAdUnit, sellers)
+      //startSequentialAuction(videoIframeAdUnit, sellers)
     }
 
     async function setupDemo () {
