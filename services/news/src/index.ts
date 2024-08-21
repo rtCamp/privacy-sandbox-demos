@@ -16,19 +16,7 @@
 
 import express, {Application, Request, Response} from 'express';
 
-const {
-  EXTERNAL_PORT,
-  PORT,
-  HOME_HOST,
-  SSP_HOST,
-  SSP_A_HOST,
-  SSP_B_HOST,
-  AD_SERVER_HOST,
-  NEWS_HOST,
-  NEWS_TOKEN,
-  NEWS_DETAIL,
-  DSP_HOST,
-} = process.env;
+const { EXTERNAL_PORT, PORT, HOME_HOST, SSP_HOST, SSP_A_HOST, SSP_C_HOST, SSP_D_HOST, SSP_B_HOST, AD_SERVER_HOST, NEWS_HOST, NEWS_TOKEN, NEWS_DETAIL, DSP_HOST, } = process.env;
 
 const app: Application = express();
 
@@ -48,7 +36,8 @@ app.get('/', async (req: Request, res: Response) => {
   const {auctionType} = req.query;
   const bucket = req.query.key;
   const cloudEnv = req.query.env;
-
+  console.log(SSP_A_HOST,
+    SSP_B_HOST, SSP_C_HOST, SSP_D_HOST)
   res.render('index', {
     title: TITLE,
     lorem: LOREM,
@@ -58,6 +47,8 @@ app.get('/', async (req: Request, res: Response) => {
     DSP_HOST,
     SSP_A_HOST,
     SSP_B_HOST,
+    SSP_C_HOST,
+    SSP_D_HOST,
     AD_SERVER_HOST,
     SSP_TAG_URL: `https://${SSP_HOST}/ad-tag.js`,
     AD_SERVER_LIB_URL: `https://${AD_SERVER_HOST}/js/ad-server-lib.js`,
