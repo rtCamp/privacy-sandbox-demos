@@ -201,8 +201,8 @@ function onAdEvent(adEvent) {
  */
 function onAdError(adErrorEvent) {
   // Handle the error logging.
-  console.log(adErrorEvent.getError());
-  adsManager.destroy();
+  // console.log(adErrorEvent.getError());
+  adsManager?.destroy();
 }
 
 /**
