@@ -44,7 +44,7 @@ function generateBid(
     render,
     allowComponentAuction: !!topLevelSeller,
   };
-  console.log(response)
+
   return response;
 }
 
