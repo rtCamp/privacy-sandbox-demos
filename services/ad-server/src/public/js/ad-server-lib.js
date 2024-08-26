@@ -45,7 +45,7 @@ class AdServerLib {
   // Protected Audience auction is executed after both the header bidding auction
   // and the ad server auction (contextual auction) have concluded
   startProtectedAudienceAuction({auctionId, adUnit, contextualAuctionResult}) {
-    const {type: adType, isFencedFrame: resolveToConfig} = adUnit;
+    const {type: adType, isFencedFrame: resolveToConfig, divId} = adUnit;
     const {contextualAd, componentAuctionConfigs} = contextualAuctionResult;
 
     // The contextual auction ad's bid acts as the bid floor
@@ -56,7 +56,7 @@ class AdServerLib {
     const componentAuctions = this.addSignalsToComponentAuctionConfigs({
       componentAuctionConfigs,
       auctionSignals: {adType, auctionId},
-      sellerSignals: {'seller-key': 'seller-value'},
+      sellerSignals: {'seller-key': 'seller-value', divId },
       perBuyerSignals: {'buyer-key': 'buyer-value'},
     });
 
@@ -69,6 +69,7 @@ class AdServerLib {
       sellerSignals: {
         bidFloor,
         adType,
+        divId
       },
       resolveToConfig,
       componentAuctions,

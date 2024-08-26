@@ -41,6 +41,7 @@ function generateBid(
   const response = {
     // We return a random bid of 0 to 100
     bid: Math.floor(Math.random() * 100, 10),
+    bidCurrency: 'USD',
     render,
     allowComponentAuction: !!topLevelSeller,
   };

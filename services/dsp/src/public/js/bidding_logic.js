@@ -34,6 +34,7 @@ function generateBid(
   });
   const response = {
     ad: 'ad-metadata',
+    bidCurrency: 'USD',
     bid: Math.floor(Math.random() * 100, 10),
     render: interestGroup.ads[0].renderUrl,
   };
