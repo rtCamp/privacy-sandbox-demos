@@ -45,7 +45,7 @@ function generateBid(
     allowComponentAuction: !!topLevelSeller,
   };
 
-  return response;
+  return null;
 }
 
 function reportWin(
