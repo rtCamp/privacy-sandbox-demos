@@ -37,7 +37,7 @@ function generateBid(
     bid: Math.floor(Math.random() * 100, 10),
     render: interestGroup.ads[0].renderUrl,
   };
-  return (Math.random() % 2 === 0)? response : null;
+  return response;
 }
 
 function reportWin(
