@@ -1,5 +1,3 @@
-version: "3.8"
-
 volumes:
   home_node_modules:
   news_node_modules:
@@ -275,9 +273,13 @@ services:
       - ssp
       - ssp-a
       - ssp-b
+      - ssp-c
+      - ssp-d
       - dsp
       - dsp-a
       - dsp-b
+      - dsp-c
+      - dsp-d
       - ad-server
       - collector
       - topics
