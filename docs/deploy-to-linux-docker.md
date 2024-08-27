@@ -99,7 +99,17 @@ Under `Privacy Sandbox Enrollment Overrides` select `Enabled` and enter your sit
 Example :
 
 ```shell
-https://privacy-sandbox-demos-dsp.dev,https://privacy-sandbox-demos-dsp-a.dev,https://privacy-sandbox-demos-dsp-b.dev,https://privacy-sandbox-demos-ssp.dev,https://privacy-sandbox-demos-ssp-a.dev,https://privacy-sandbox-demos-ssp-b.dev,https://privacy-sandbox-demos-ad-server.dev
+https://privacy-sandbox-demos-dsp.dev,
+https://privacy-sandbox-demos-dsp-a.dev,
+https://privacy-sandbox-demos-dsp-b.dev,
+https://privacy-sandbox-demos-dsp-c.dev,
+https://privacy-sandbox-demos-dsp-d.dev,
+https://privacy-sandbox-demos-ssp.dev,
+https://privacy-sandbox-demos-ssp-a.dev,
+https://privacy-sandbox-demos-ssp-b.dev,
+https://privacy-sandbox-demos-ssp-c.dev,
+https://privacy-sandbox-demos-ssp-d.dev,
+https://privacy-sandbox-demos-ad-server.dev
 ```
 
 ## Build & Run your local development environment

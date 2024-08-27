@@ -39,13 +39,19 @@ const {
   DSP_A_DETAIL,
   SSP_A_HOST,
   SSP_B_HOST,
+  SSP_C_HOST,
+  SSP_D_HOST,
   SHOP_HOST,
 } = process.env;
 
 const SSP_A = new URL(`https://${SSP_A_HOST}:${EXTERNAL_PORT}`).toString();
 const SSP_B = new URL(`https://${SSP_B_HOST}:${EXTERNAL_PORT}`).toString();
+const SSP_C = new URL(`https://${SSP_C_HOST}:${EXTERNAL_PORT}`).toString();
+const SSP_D = new URL(`https://${SSP_D_HOST}:${EXTERNAL_PORT}`).toString();
 const SSP_A_VAST_URL = `${SSP_A}vast`;
 const SSP_B_VAST_URL = `${SSP_B}vast`;
+const SSP_C_VAST_URL = `${SSP_C}vast`;
+const SSP_D_VAST_URL = `${SSP_D}vast`;
 
 // in-memory storage for debug reports
 const Reports: any[] = [];
@@ -150,6 +156,12 @@ app.get('/interest-group.json', async (req: Request, res: Response) => {
   const videoCreativeForSspB = new URL(
     `https://${DSP_A_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_B_VAST_URL}`,
   );
+  const videoCreativeForSspC = new URL(
+    `https://${DSP_A_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_C_VAST_URL}`,
+  );
+  const videoCreativeForSspD = new URL(
+    `https://${DSP_A_HOST}:${EXTERNAL_PORT}/html/video-ad-creative.html?sspVastUrl=${SSP_D_VAST_URL}`,
+  );
 
   const owner = new URL(`https://${DSP_A_HOST}:${EXTERNAL_PORT}`);
   const biddingLogicUrl = new URL(
@@ -205,6 +217,20 @@ app.get('/interest-group.json', async (req: Request, res: Response) => {
         metadata: {
           adType: 'video',
           seller: SSP_B,
+        },
+      },
+      {
+        renderUrl: videoCreativeForSspC,
+        metadata: {
+          adType: 'video',
+          seller: SSP_C,
+        },
+      },
+      {
+        renderUrl: videoCreativeForSspD,
+        metadata: {
+          adType: 'video',
+          seller: SSP_D,
         },
       },
     ],

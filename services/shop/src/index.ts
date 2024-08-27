@@ -22,6 +22,8 @@ import {
   DSP_HOST,
   DSP_A_HOST,
   DSP_B_HOST,
+  DSP_C_HOST,
+  DSP_D_HOST,
   EXTERNAL_PORT,
   PORT,
   SHOP_DETAIL,
@@ -131,12 +133,17 @@ app.get('/items/:id', async (req: Request, res: Response) => {
   const DSP_B_TAG_URL = new URL(
     `https://${DSP_B_HOST}:${EXTERNAL_PORT}/dsp-tag.js`,
   );
+  const DSP_C_TAG_URL = new URL(`https://${DSP_C_HOST}:${EXTERNAL_PORT}/dsp-tag.js`);
+  const DSP_D_TAG_URL = new URL(`https://${DSP_D_HOST}:${EXTERNAL_PORT}/dsp-tag.js`);
+    
 
   res.render('item', {
     item,
     DSP_TAG_URL,
     DSP_A_TAG_URL,
     DSP_B_TAG_URL,
+    DSP_C_TAG_URL,
+    DSP_D_TAG_URL,
     SHOP_HOST,
     isMultiSeller,
   });

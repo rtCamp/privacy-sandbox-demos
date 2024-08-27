@@ -32,11 +32,13 @@ function generateBid(
     trustedBiddingSignals,
     browserSignals,
   });
-  return {
+  const response = {
     ad: 'ad-metadata',
+    bidCurrency: 'USD',
     bid: Math.floor(Math.random() * 100, 10),
     render: interestGroup.ads[0].renderUrl,
   };
+  return response;
 }
 
 function reportWin(

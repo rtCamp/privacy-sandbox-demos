@@ -93,6 +93,8 @@
 
       const DSP_A_TAG_URL = '<%= DSP_A_TAG_URL %>'
       const DSP_B_TAG_URL = '<%= DSP_B_TAG_URL %>'
+      const DSP_C_TAG_URL = '<%= DSP_C_TAG_URL %>'
+      const DSP_D_TAG_URL = '<%= DSP_D_TAG_URL %>'
 
       if ('<%= isMultiSeller %>' === 'true') {
         const dspAScript = buildDspScriptTag(`${DSP_A_TAG_URL}`, 'dsp_a_tag')
@@ -100,6 +102,12 @@
 
         const dspBScript = buildDspScriptTag(`${DSP_B_TAG_URL}`, 'dsp_b_tag')
         document.body.appendChild(dspBScript);
+
+        const dspDScript = buildDspScriptTag(`${DSP_D_TAG_URL}`, 'dsp_d_tag')
+        document.body.appendChild(dspDScript);
+
+        const dspCScript = buildDspScriptTag(`${DSP_C_TAG_URL}`, 'dsp_c_tag')
+        document.body.appendChild(dspCScript);
       } else {
         const dspScript = buildDspScriptTag('<%= DSP_TAG_URL %>', 'dsp_tag')
         document.body.appendChild(dspScript);

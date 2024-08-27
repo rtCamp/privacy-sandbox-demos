@@ -26,10 +26,16 @@ const __dirname = path.dirname(__filename);
 const {
   EXTERNAL_PORT,
   PORT,
+  SSP_C_HOST,
+  SSP_D_HOST,
   SSP_A_HOST,
   SSP_B_HOST,
   SSP_A_DETAIL,
   SSP_A_TOKEN,
+  DSP_C_HOST,
+  DSP_C_URI,
+  DSP_D_HOST,
+  DSP_D_URI,
   DSP_A_HOST,
   DSP_A_URI,
   DSP_B_HOST,
@@ -40,6 +46,8 @@ const {
 
 const DSP_A = new URL(`https://${DSP_A_HOST}:${EXTERNAL_PORT}`);
 const DSP_B = new URL(`https://${DSP_B_HOST}:${EXTERNAL_PORT}`);
+const DSP_C = new URL(`https://${DSP_C_HOST}:${EXTERNAL_PORT}`);
+const DSP_D = new URL(`https://${DSP_D_HOST}:${EXTERNAL_PORT}`);
 const SSP_A = new URL(`https://${SSP_A_HOST}:${EXTERNAL_PORT}`);
 
 const app = express();
@@ -53,8 +61,12 @@ app.use((req, res, next) => {
 const ALLOWED_HOSTNAMES = [
   DSP_A_HOST,
   DSP_B_HOST,
+  DSP_C_HOST,
+  DSP_D_HOST,
   SSP_A_HOST,
   SSP_B_HOST,
+  SSP_C_HOST,
+  SSP_D_HOST,
   NEWS_HOST,
 ];
 
@@ -99,6 +111,8 @@ app.get('/', async (req, res) => {
     title,
     DSP_A_HOST,
     DSP_B_HOST,
+    DSP_C_HOST,
+    DSP_D_HOST,
     SSP_A_HOST,
     EXTERNAL_PORT,
     SHOP_HOST,
@@ -115,7 +129,7 @@ app.get('/video-ad-tag.html', async (req, res) => {
 
 async function getHeaderBiddingAd() {
   const headerBids = await Promise.all(
-    [`${DSP_A_URI}/header-bid`, `${DSP_B_URI}/header-bid`].map(
+    [`${DSP_A_URI}/header-bid`, `${DSP_B_URI}/header-bid`, `${DSP_C_URI}/header-bid`, `${DSP_D_URI}/header-bid`].map(
       async (dspUrl) => {
         const response = await fetch(dspUrl);
         const result = await response.json();
@@ -134,10 +148,12 @@ function getComponentAuctionConfig() {
     decisionLogicUrl: `${SSP_A}js/decision-logic.js`,
     trustedScoringSignalsURL: `${SSP_A}/signals/trusted.json`,
     directFromSellerSignals: `${SSP_A}/signals/direct.json`,
-    interestGroupBuyers: [DSP_A, DSP_B],
+    interestGroupBuyers: [DSP_A, DSP_B, DSP_C, DSP_D],
     perBuyerSignals: {
       [DSP_A]: {'some-key': 'some-value'},
       [DSP_B]: {'some-key': 'some-value'},
+      [DSP_C]: {'some-key': 'some-value'},
+      [DSP_D]: {'some-key': 'some-value'},
     },
     // After M123, you will be able to pass in data from the winning SSP to the
     // ad creative using deprecatedReplaceInURN for component sellers:
@@ -159,7 +175,7 @@ app.get('/header-bid', async (req, res) => {
 
 async function getAdServerAd() {
   const adServerBids = await Promise.all(
-    [`${DSP_A_URI}/ad-server-bid`, `${DSP_B_URI}/ad-server-bid`].map(
+    [`${DSP_A_URI}/ad-server-bid`, `${DSP_B_URI}/ad-server-bid`, `${DSP_C_URI}/ad-server-bid`, `${DSP_D_URI}/ad-server-bid`].map(
       async (dspUrl) => {
         const response = await fetch(dspUrl);
         const result = await response.json();

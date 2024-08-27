@@ -42,6 +42,7 @@ function generateBid(
     // We return a random bid of 0 to 100
     bid: Math.floor(Math.random() * 100, 10),
     render,
+    bidCurrency: 'USD',
     allowComponentAuction: !!topLevelSeller,
   };
 
