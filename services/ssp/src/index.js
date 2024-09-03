@@ -251,6 +251,8 @@ app.get('/auction-config.json', async (req, res) => {
     // only for single party
     sellerSignals: {
       seller_signals: 'seller_signals',
+      divId: 'image-ad--iframe-single-seller',
+      size: [300, 250]
     },
 
     // only for single party
