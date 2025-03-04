@@ -128,11 +128,11 @@ Note right of Browser:Scenario 1 stops here
 
 ### User Journey #1
 
-1. [Navigate to shop site](https://privacy-sandbox-demos-shop.dev/) (advertiser)
+1. <a href="https://privacy-sandbox-demos-shop.dev/">Navigate to shop site</a> (advertiser)
 2. Click on a “shoe” product item on the shop site.
    - The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the
      browser to join an ad interest group for this product or this specific product category.
-3. [Navigate to the news site](https://privacy-sandbox-demos-news.dev/) (publisher)
+3. <a href="https://privacy-sandbox-demos-news.dev/">Navigate to the news site</a> (publisher)
 4. Observe the ad served on the news site
    - If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
    - When the page was loaded, Protected Audience API allowed the SSP to run an ad auction on the publisher site.

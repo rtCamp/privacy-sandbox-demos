@@ -134,13 +134,13 @@ Note over DSP:Scenario 1 stops here<br/>where we visualize<br/>debug reports
 
 ### User Journey #1
 
-1. [Navigate to shop site](https://privacy-sandbox-demos-shop.dev/) (advertiser)
+1. <a href="https://privacy-sandbox-demos-shop.dev/">Navigate to shop site</a> (advertiser)
 2. Click on a “shoe” product item on the shop site.
 
 - The shop (advertiser) would assume the user is interested in this type of product, so they would leverage Protected Audience API and ask the browser
   to join an ad interest group for this product or this specific product category.
 
-3. [Navigate to the news site](https://privacy-sandbox-demos-news.dev/) (publisher)
+3. <a href="https://privacy-sandbox-demos-news.dev/">Navigate to the news site</a> (publisher)
 4. Observe the ad served on the news site
 
 - If you previously browsed the “shoe” product on the shop site, you will be shown an ad for the same product.
@@ -174,7 +174,7 @@ Note over DSP:Scenario 1 stops here<br/>where we visualize<br/>debug reports
   quantity of the product item purchased. the `Aggregatable Status` indicates **Success: Report stored**, it means Attribution Reporting API has now
   stored this report in the browser. It will then be scheduled for sending to the `reporting origin` at a later time.
 
-10. Navigate to [DSP service report visualization page](https://privacy-sandbox-demos-dsp.dev/reports)
+10. Navigate to <a href="https://privacy-sandbox-demos-dsp.dev/reports">DSP service report visualization page</a>
 
 - on this page you can see the aggregatable report sent by the browser to the DSP. In a production environment, the aggregatable report is encrypted
   by the browser and sent to the DSP. There, they will be batched and sent to the Aggregation Service where they will be aggregated and noised to
