@@ -11,7 +11,7 @@ Serving requested Ads. It includes ads creative (Image, Video etc). Clicking ads
       <a
         width="300"
         height="250"
-        target="_blank"
+        target="_self"
         rel="noopener noreferrer"
         attributionsrc="https://privacy-sandbox-demos-ssp.dev/register-source?advertiser=privacy-sandbox-demos-shop.dev&amp;id=1fa74"
         href="https://privacy-sandbox-demos-shop.dev/items/1fa74"

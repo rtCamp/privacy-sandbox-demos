@@ -33,7 +33,7 @@
     <h2>inside iframe</h2>
     <ul>
       <li>
-        <a target="_blank"
+        <a target="_self"
            href="<%= new URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ad-tag.html`) %>">
           <%= new
               URL(`https://${SSP_HOST}:${EXTERNAL_PORT}/ad-tag.html`)
@@ -41,7 +41,7 @@
         </a>
       </li>
       <li>
-        <a target="_blank"
+        <a target="_self"
            href="<%= new URL(`https://${DSP_HOST}:${EXTERNAL_PORT}/ads?advertiser=${SHOP_HOST}&id=1f45e`) %>">
           <%= new
               URL(`https://${DSP_HOST}:${EXTERNAL_PORT}/ads?advertiser=${SHOP_HOST}&id=1f45e`)

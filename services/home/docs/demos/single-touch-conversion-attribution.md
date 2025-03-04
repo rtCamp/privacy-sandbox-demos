@@ -195,7 +195,7 @@ displaying the ad creative
   <a
     width="300"
     height="250"
-    target="_blank"
+    target="_self"
     rel="noopener noreferrer"
     attributionsrc="https://privacy-sandbox-demos-dsp.dev/register-source?advertiser=privacy-sandbox-demos-shop.dev&amp;id=1fa70"
     href="https://privacy-sandbox-demos-shop.dev/items/1fa70"
