@@ -70,7 +70,7 @@ app.use(express.json());
 
 app.use((req, res, next) => {
   // opt-in fencedframe
-  if (req.get('sec-fetch-dest') === 'fencedframe') {
+  if (req.get('sec-fetch-dest') === 'fencedframe' || req.get('sec-fetch-dest') === 'iframe') {
     res.setHeader('Supports-Loading-Mode', 'fenced-frame');
   }
   next();
