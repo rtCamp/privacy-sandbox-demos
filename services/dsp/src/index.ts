@@ -83,6 +83,9 @@ app.use(
       if (url.pathname.endsWith('bidding_signal.json')) {
         return res.set('X-Allow-FLEDGE', 'true');
       }
+      if (url.pathname.endsWith('video-ad-creative.html')) {
+        return res.set('Supports-Loading-Mode', 'fenced-frame');
+      }
     },
   }),
 );
