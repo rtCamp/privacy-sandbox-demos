@@ -80,8 +80,8 @@ https://privacy-sandbox-demos-ad-server.dev
 The query param that enables the video ad demo on the advertiser and publisher sites is `?auctionType=multi`.
 
 1. Navigate to advertiser site:
-   <a href="https://privacy-sandbox-demos-shop.dev/items/1f45e?auctionType=multi">https://privacy-sandbox-demos-shop.dev/items/1f45e?auctionType=multi</a>
-1. Navigate to publisher site: <a href="https://privacy-sandbox-demos-news.dev/?auctionType=multi">https://privacy-sandbox-demos-news.dev/?auctionType=multi</a>
+   <a href="https://privacy-sandbox-demos-shop.dev/items/1f45e?auctionType=multi">`https://privacy-sandbox-demos-shop.dev/items/1f45e?auctionType=multi`</a>
+1. Navigate to publisher site: <a href="https://privacy-sandbox-demos-news.dev/?auctionType=multi">`https://privacy-sandbox-demos-news.dev/?auctionType=multi`</a>
 1. Click ‘Play video’ when the button is ready
 
 ### Explanation
