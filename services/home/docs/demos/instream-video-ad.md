@@ -133,15 +133,15 @@ Browsr ->> Browser: Ad server library passes this finalized VAST to the video pl
 
 ### User Journey
 
-1. [Navigate to the news site :arrow_upper_right:](https://privacy-sandbox-demos-news.dev/iframe-video-ad) (publisher)
+1. <a href="https://privacy-sandbox-demos-news.dev/iframe-video-ad">Navigate to the news site :arrow_upper_right:</a> (publisher)
    - Observe that this page contains some video content served by the publisher. When you click on the play button, the video content plays without
      ads.
    - The participating ad buyers or DSPs don't generate any contextual bids for video ads. And since we just cleared all data, there are no interest
      groups to generate bids for video ads.
-2. [Navigate to shop site :arrow_upper_right:](https://privacy-sandbox-demos-shop.dev/) (advertiser)
+2. <a href="https://privacy-sandbox-demos-shop.dev/">Navigate to shop site :arrow_upper_right:</a> (advertiser)
    - Click on any "shoe" product item on the shop site. DSP tags on this product detail page will leverage the Protected Audience API to join an ad
      interest group.
-3. [Navigate to the news site again :arrow_upper_right:](https://privacy-sandbox-demos-news.dev/iframe-video-ad) (publisher)
+3. <a href="https://privacy-sandbox-demos-news.dev/iframe-video-ad">Navigate to the news site again :arrow_upper_right:</a> (publisher)
    - Observe that this time when you click the play button, a pre-roll ad is played before the content. This ad was delivered using a VAST XML
      delivered via Protected Audience.
 

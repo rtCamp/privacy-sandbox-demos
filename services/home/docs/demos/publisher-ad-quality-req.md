@@ -141,10 +141,10 @@ DSP -->> Browser: Return ad creative
 
 ### User Journey
 
-1. [Navigate to shop site](https://privacy-sandbox-demos-shop.dev/) (advertiser)
+1. <a href="https://privacy-sandbox-demos-shop.dev/">Navigate to shop site</a> (advertiser)
 2. Click on any "shoe" product item on the shop site. The shop (advertiser) would assume the user is interested in this type of shoe, so they would
    leverage Protected Audience API and ask the browser to join an ad interest group for this product.
-3. [Navigate to this page on the news site](https://privacy-sandbox-demos-news.dev/publisher-ad-quality-req) (publisher)
+3. <a href="https://privacy-sandbox-demos-news.dev/publisher-ad-quality-req">Navigate to this page on the news site</a> (publisher)
 4. Observe the ad served on the news site is for the shoe product you recently browsed.
 5. Click on a button which matches your selected shoe:
    - Hide Red Shoes
